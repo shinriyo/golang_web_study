@@ -1,12 +1,13 @@
 package main
 
 import (
-    "fmt"
+//    "fmt"
     "net/http"
     "io/ioutil"
 //    "os"
 //    "template"
 //    "old/template"
+    "text/template"
 )
 
 
@@ -43,7 +44,9 @@ const lenPath = len("/view/")
 func viewHandler(w http.ResponseWriter, r *http.Request) {
     title := r.URL.Path[lenPath:]
     p, _ := loadPage(title)
-    fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
+    //fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
+    t, _ := template.ParseFiles("view.html")
+    t.Execute(w, p)
 }
 
 func editHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,10 +55,14 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         p = &Page{Title: title}
     }
+    /*
     fmt.Fprintf(w, "<h1>Editing</h1>"+
         "<textarea name=\"body\">" +
         "<input type=\"submit\" value=\"Save\">" +
         p.Title, p.Title, p.Body)
+    */
+    t, _ := template.ParseFiles("view.html")
+    t.Execute(w, p)
 }
 
 func main() {
