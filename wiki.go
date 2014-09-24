@@ -44,9 +44,7 @@ const lenPath = len("/view/")
 func viewHandler(w http.ResponseWriter, r *http.Request) {
     title := r.URL.Path[lenPath:]
     p, _ := loadPage(title)
-    //fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
-    t, _ := template.ParseFiles("view.html")
-    t.Execute(w, p)
+    renderTemplate(w, "view", p)
 }
 
 func editHandler(w http.ResponseWriter, r *http.Request) {
@@ -55,12 +53,10 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         p = &Page{Title: title}
     }
-    /*
-    fmt.Fprintf(w, "<h1>Editing</h1>"+
-        "<textarea name=\"body\">" +
-        "<input type=\"submit\" value=\"Save\">" +
-        p.Title, p.Title, p.Body)
-    */
+    renderTemplate(w, "edit", p)
+}
+
+func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
     t, _ := template.ParseFiles("view.html")
     t.Execute(w, p)
 }
