@@ -36,7 +36,7 @@ http://localhost:8080/monkeys
 
 ```
 echo "Hello world" > test.txt
-$ 8g wiki.go
+8g wiki.go
 8l wiki.8
 ./8.out
 ```
