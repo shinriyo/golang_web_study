@@ -42,3 +42,8 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
     p, _ := loadPage(title)
     fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
 }
+
+func main() {
+    http.HandleFunc("/view/", viewHandler)
+    http.ListenAndServe(":8080", nil)
+}
