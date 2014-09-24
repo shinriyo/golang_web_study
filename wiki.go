@@ -61,6 +61,18 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
     t.Execute(w, p)
 }
 
+func viewHandler(w http.ResponseWriter, r *http.Request) {
+    title, err := getTitle(w, r)
+    if err != nil {
+        return
+    }
+    p, err := loadPage(title)
+    if err != nil {
+        http.Redirect(w, r, "/edit/"+title, http.StatusFound)
+    }
+    renderTemplate(w, "view", p)
+}
+
 func main() {
     http.HandleFunc("/view/", viewHandler)
     http.HandleFunc("/edit/", editHandler)
