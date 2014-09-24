@@ -34,3 +34,17 @@ hello_http.goで作成している。
 http://localhost:8080/monkeys
 へWebブラウザでアクセスする。
 
+```
+echo "Hello world" > test.txt
+$ 8g wiki.go
+8l wiki.8
+./8.out
+```
+
+echo "Hello world" > test.txt
+はしなくてもいい。
+
+http://localhost:8080/view/test
+
+
+へWebブラウザでアクセスする。
